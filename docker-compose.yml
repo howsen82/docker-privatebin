@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  privatebin:
+    container_name: privatebin
+    image: privatebin/nginx-fpm-alpine
+    volumes:
+      - /data/privatebin-data:/srv/data
+      # - /data/conf.php:/srv/cfg/conf.php:ro
+    ports:
+      - 8080:8080
+    restart: always
+    # read_only: true
+    # mem_limit: 2g
+    # cpu_shares: 768
+    # security_opt:
+    #   - no-new-privileges:true

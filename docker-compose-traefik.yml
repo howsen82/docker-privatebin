@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  privatebin:
+    container_name: privatebin
+    image: privatebin/nginx-fpm-alpine
+    volumes:
+      - /data/privatebin:/srv/data
+    ports:
+      - 8080:8080
+    networks:
+      - traefik_public
+    restart: always
+    labels:
+      # traefik common
+      - traefik.enable=true
+      - traefik.docker.network=traefik_public
+
+      # traefikv1
+      - traefik.frontend.rule=Host:privatebin.example.com
+      - traefik.port=4180
+
+networks:
+  traefik_public:
+    external: true
